@@ -6,7 +6,6 @@ const sequelize = new Sequelize(dbConfigs.DB, dbConfigs.USER, dbConfigs.PASSWORD
     dialect: dbConfigs.dialect,
 
 })
-
 async function connection(){
     try {
         await sequelize.authenticate();
@@ -15,5 +14,4 @@ async function connection(){
         console.error('Unable to connect to the database:', error);
       }
 }
-
 connection(); 
