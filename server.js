@@ -1,11 +1,12 @@
 const dbConfigs = require("./configs")
-const { Sequelize } = require("sequelize");
+const { Sequelize, DataTypes } = require("sequelize");
 
 const sequelize = new Sequelize(dbConfigs.DB, dbConfigs.USER, dbConfigs.PASSWORD, {
     host: dbConfigs.HOST,
     dialect: dbConfigs.dialect,
 
 })
+const User = require("./models/model")(sequelize,DataTypes);
 async function connection(){
     try {
         await sequelize.authenticate();
@@ -15,3 +16,7 @@ async function connection(){
       }
 }
 connection(); 
+(async () => {
+  await sequelize.sync({ force: true });
+  await User.create({name: 'gago'})
+})();
